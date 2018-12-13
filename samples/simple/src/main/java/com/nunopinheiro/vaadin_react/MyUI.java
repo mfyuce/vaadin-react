@@ -40,7 +40,7 @@ public class MyUI extends UI {
 		setContent(layout);
 	}
 
-	private void handle(JsonArray args){
+	public void handle(JsonArray args){
 		System.out.println("name changed to " + args.getString(0));
 	}
 	

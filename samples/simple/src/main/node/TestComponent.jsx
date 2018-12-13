@@ -9,12 +9,12 @@ export var TestComponent = React.createClass({
     return {"name" : this.props.name}
   },
   render : function(){
-    return <div>
-              <h1>Hello, {this.state.name}</h1>
-              Change Name :
-              <input type="text" onChange={this.nameChanged} />
-              <button onClick={this.triggerNameChangeEvent}>Click to change name on server</button>
-           </div>;
+       return <div>
+                 <h1>Hello, {this.state.name}</h1>
+                 Change Name :
+                 <input type="text" onChange={this.nameChanged} />
+                 <button onClick={this.triggerNameChangeEvent}>Click to change name on server</button>
+              </div>;
   },
   nameChanged : function(e){
     if(this.state.name != e.target.value){
@@ -22,8 +22,8 @@ export var TestComponent = React.createClass({
     }
   },
   triggerNameChangeEvent : function(e){
-    this.props.onNameChange(this.state.name)
-  }
+       this.props.onNameChange(this.state.name)
+     }
 });
 
 

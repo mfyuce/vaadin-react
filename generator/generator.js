@@ -8,6 +8,7 @@ var defaultImplClassTemplate = fs.readFileSync(__dirname + "/templates/DefaultIm
 var connectorTemplate = fs.readFileSync(__dirname + "/templates/Connector.js", "utf8")
 var Mustache = require("mustache");
 require("./reactReflectiveProptypes")
+
 function listFiles(path){
   var stat = fs.statSync(path)
   if(stat.isDirectory()){
@@ -42,6 +43,7 @@ function readComponentName(file){
   var componentWithExtension = splitted[splitted.length - 1]
   return componentWithExtension.split(".")[0]
 }
+
 function processFile(file){
 
   var src = fs.readFileSync(file)
@@ -57,23 +59,24 @@ function processFile(file){
 
   for(var propName in component.propTypes){
     var prop = component.propTypes[propName]
+
     var upperName = propName[0].toUpperCase() + propName.substring(1)
     var processedProp = { name : propName, upperName : upperName}
     addJavaType(processedProp, prop.type)
     processedProps.push(processedProp)
-
+    console.log(prop)
     if(prop.required){
       //Create arguments string for the constructor, we are doing it here because it would be uglier in mustache
       if(requiredArgList != ""){
         requiredArgList += ", ";
         requiredArgListCall += ", ";
       }
-      requiredArgList += `${processedProp.type} ${prop.name}`
-      requiredArgListCall += `${prop.name}`
+     console.log(`${processedProp.type} ${propName}`)
+      requiredArgList += `${processedProp.type} ${propName}`
+      requiredArgListCall += `${propName}`
       requiredProps.push(processedProp)
     }
   }
-
   var view = {
       name : componentName,
       requiredProps : requiredProps,
@@ -163,7 +166,7 @@ function addJavaType(properties, type){
     case "custom":
     case "shape":
     default:
-      throw "Unsupported type: " + type
+      throw "Unsupported type: " + type + " " +  properties.name + ":" + properties.upperName + ":" + properties.type
   }
 }
 

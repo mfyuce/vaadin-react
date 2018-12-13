@@ -16,7 +16,7 @@ var renderFunction = "$vaadinReact{{name}}Render";
 
 window[connectorName] = function() {
       this.onStateChange = function() {
-        var component = window[renderFunction](this.getState());
+        var component = window[renderFunction].call(this, this.getState());
         ReactDOM.render(component, this.getElement());
     }
 };

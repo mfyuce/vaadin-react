@@ -2,7 +2,8 @@
   "name": "vaadin-react",
   "dependencies": {
     "browserify": "",
-    "mustache": "^2.2.1"
+    "mustache": "^2.2.1",
+    "react-docgen": ""
   },
   "scripts": {
     "compile": "babel src/main/node --out-dir src/main/node;"
