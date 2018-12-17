@@ -10,12 +10,13 @@
 	<name>vaadin-react</name>
 
 	<properties>
-		<vaadin.version>7.6.7</vaadin.version>
+		<vaadin.version>7.4.0</vaadin.version>
+		<vaadin.bom.version>7.4.0</vaadin.bom.version>
 		<vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
-		<jetty.plugin.version>9.2.3.v20140905</jetty.plugin.version>
+		<jetty.plugin.version>9.1.0.v20131115</jetty.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
 	</properties>
 
 	<repositories>
@@ -40,7 +41,7 @@
 			<dependency>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-bom</artifactId>
-				<version>${vaadin.version}</version>
+				<version>${vaadin.bom.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -57,14 +58,17 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-server</artifactId>
+			<version>${vaadin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-push</artifactId>
+			<version>${vaadin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-client</artifactId>
+			<version>${vaadin.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<!-- Needed when using the widgetset optimizer (custom ConnectorBundleLoaderFactory).
@@ -76,6 +80,7 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-themes</artifactId>
+			<version>${vaadin.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -181,6 +186,8 @@
 		</plugins>
 	</build>
 
+
+
 	<profiles>
 		<profile>
 			<!-- Vaadin pre-release repositories -->
@@ -194,11 +201,31 @@
 					<id>vaadin-prereleases</id>
 					<url>http://maven.vaadin.com/vaadin-prereleases</url>
 				</repository>
+				<repository>
+					<id>vaadin-snapshots</id>
+					<url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
 			</repositories>
 			<pluginRepositories>
 				<pluginRepository>
 					<id>vaadin-prereleases</id>
 					<url>http://maven.vaadin.com/vaadin-prereleases</url>
+				</pluginRepository>
+				<pluginRepository>
+					<id>vaadin-snapshots</id>
+					<url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
 				</pluginRepository>
 			</pluginRepositories>
 		</profile>

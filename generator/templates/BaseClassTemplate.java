@@ -81,7 +81,12 @@ abstract public class {{ name }}_Base extends ReactComponent{
 			public void set{{upperName}}({{ type }} {{name}}){
 				this.{{name}} = {{name}};
 				if({{name}} != null){
-					addFunction("{{name}}Handler", this::handle{{upperName}});
+					addFunction("{{name}}Handler", new JavaScriptFunction() {
+                            @Override
+                            public void call(JsonArray jsonArray) {
+                                    handle{{upperName}}(jsonArray);
+                                    }
+                        });
 				}
 			}
 		{{/isFunction}}

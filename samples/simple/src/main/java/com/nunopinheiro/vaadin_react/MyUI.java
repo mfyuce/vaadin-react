@@ -7,14 +7,10 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 
-import elemental.js.json.JsJsonArray;
 import elemental.json.JsonArray;
+import elemental.json.JsonException;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser
@@ -33,7 +29,12 @@ public class MyUI extends UI {
 	protected void init(VaadinRequest vaadinRequest) {
 		final VerticalLayout layout = new VerticalLayout();
 		
-		layout.addComponent(new TestComponentImpl("Nuno", this::handle));
+		layout.addComponent(new TestComponentImpl("Nuno", new JavaScriptFunction() {
+			@Override
+			public void call(JsonArray arguments) throws JsonException {
+				MyUI.this.handle(arguments);
+			}
+		} ));
 		layout.setMargin(true);
 		layout.setSpacing(true);
 
