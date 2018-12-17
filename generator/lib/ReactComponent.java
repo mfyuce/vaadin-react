@@ -8,9 +8,7 @@ import java.util.Map;
 import com.vaadin.server.JsonCodec;
 import com.vaadin.server.communication.JSONSerializer;
 import com.vaadin.ui.ConnectorTracker;
-import elemental.json.JsonValue;
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import org.json.JSONObject;
 import com.vaadin.server.EncodeResult;
 import com.vaadin.ui.AbstractJavaScriptComponent;
 
@@ -94,12 +92,12 @@ public abstract class ReactComponent extends AbstractJavaScriptComponent{
 		static final Method defaultSerializerMethod = setupSerializationMethod();
 		@Override
 
-		public ReactComponentStateWrapper deserialize(Type type, JsonValue jsonValue, ConnectorTracker connectorTracker) {
+		public ReactComponentStateWrapper deserialize(Type type, Object jsonValue, ConnectorTracker connectorTracker) {
 			throw new RuntimeException("Unable to deserialize components");
 		}
 
 		@Override
-		public JsonValue serialize(ReactComponentStateWrapper value, ConnectorTracker connectorTracker) {
+		public Object serialize(ReactComponentStateWrapper value, ConnectorTracker connectorTracker) {
 			try {
         EncodeResult result = (EncodeResult) defaultSerializerMethod.invoke(null, value.getState(), value.getState().getClass(), null, connectorTracker);
         return result.getEncodedValue();
@@ -112,7 +110,7 @@ public abstract class ReactComponent extends AbstractJavaScriptComponent{
 	private static Method setupSerializationMethod() {
 		Method defaultSerializerMethod;
 		try {
-			defaultSerializerMethod = JsonCodec.class.getDeclaredMethod("encodeObject", Object.class, Class.class, JsonObject.class,
+			defaultSerializerMethod = JsonCodec.class.getDeclaredMethod("encodeObject", Object.class, Class.class, JSONObject.class,
 					ConnectorTracker.class);
 			defaultSerializerMethod.setAccessible(true);
 		} catch (NoSuchMethodException | SecurityException e) {

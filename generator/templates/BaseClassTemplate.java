@@ -3,8 +3,10 @@ package {{package}};
 import com.vaadin.ui.AbstractJavaScriptComponent;
 import com.vaadin.shared.ui.JavaScriptComponentState;
 import com.vaadin.ui.JavaScriptFunction;
-import elemental.json.JsonArray;
+import org.json.JSONArray;
 import com.nunopinheiro.vaadin_react.ReactComponent;
+import org.json.JSONException;
+
 
 abstract public class {{ name }}_Base extends ReactComponent{
 
@@ -70,7 +72,7 @@ abstract public class {{ name }}_Base extends ReactComponent{
 
 			public {{ type }} {{ name }};
 
-			private void handle{{upperName}}(JsonArray args){
+			private void handle{{upperName}}(JSONArray args) throws JSONException {
 				get{{upperName}}().call(args);
 			}
 
@@ -83,7 +85,7 @@ abstract public class {{ name }}_Base extends ReactComponent{
 				if({{name}} != null){
 					addFunction("{{name}}Handler", new JavaScriptFunction() {
                             @Override
-                            public void call(JsonArray jsonArray) {
+                            public void call(JSONArray jsonArray)  throws JSONException {
                                     handle{{upperName}}(jsonArray);
                                     }
                         });
