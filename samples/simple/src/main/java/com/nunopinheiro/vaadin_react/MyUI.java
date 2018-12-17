@@ -9,8 +9,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.*;
 
-import elemental.json.JsonArray;
-import elemental.json.JsonException;
+import org.json.JSONException;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser
@@ -31,7 +30,7 @@ public class MyUI extends UI {
 		
 		layout.addComponent(new TestComponentImpl("Nuno", new JavaScriptFunction() {
 			@Override
-			public void call(JsonArray arguments) throws JsonException {
+			public void call(org.json.JSONArray arguments) throws JSONException {
 				MyUI.this.handle(arguments);
 			}
 		} ));
@@ -41,7 +40,7 @@ public class MyUI extends UI {
 		setContent(layout);
 	}
 
-	public void handle(JsonArray args){
+	public void handle(org.json.JSONArray args) throws JSONException {
 		System.out.println("name changed to " + args.getString(0));
 	}
 	
