@@ -91,8 +91,8 @@ function processFile(file){
   var renderedConnector = Mustache.render(connectorTemplate, view);
 
   //We are assuming maven (at least for now), we will be writting to target/generated-sources/vaadin-react
-  var javaDir = "target/generated-sources/vaadin-react/" + getPackageAsPath(configuration.package) + "/";
-  var resourcesDir = "target/classes/" + getPackageAsPath(configuration.package) + "/";
+  var javaDir = "src/main/vaadin-react/" + getPackageAsPath(configuration.package) + "/";
+  var resourcesDir = "src/main/vaadin-react/" + getPackageAsPath(configuration.package) + "/";
   mkdirs(javaDir);
   mkdirs(resourcesDir);
   fs.writeFileSync(javaDir +  componentName + "_Base.java", renderedBase, 'utf8');
@@ -111,7 +111,7 @@ function processFile(file){
 
 
   //Copy the lib to the target folder - we are avoiding a maven distribution for now
-  var libPackageFolder = "target/generated-sources/vaadin-react/com/nunopinheiro/vaadin_react";
+  var libPackageFolder = "src/main/vaadin-react/com/nunopinheiro/vaadin_react";
   mkdirs(libPackageFolder);
   fs.createReadStream(__dirname + "/lib/ReactComponent.java", "utf8").pipe(fs.createWriteStream(libPackageFolder + "/ReactComponent.java"));
 }

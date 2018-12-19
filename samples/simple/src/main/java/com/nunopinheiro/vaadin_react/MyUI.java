@@ -26,18 +26,18 @@ public class MyUI extends UI {
 
 	@Override
 	protected void init(VaadinRequest vaadinRequest) {
-		final VerticalLayout layout = new VerticalLayout();
-		
-		layout.addComponent(new TestComponentImpl("Nuno", new JavaScriptFunction() {
-			@Override
-			public void call(org.json.JSONArray arguments) throws JSONException {
-				MyUI.this.handle(arguments);
-			}
-		} ));
-		layout.setMargin(true);
-		layout.setSpacing(true);
+			final VerticalLayout layout = new VerticalLayout();
 
-		setContent(layout);
+			layout.addComponent(new TestComponentImpl("Nuno", new JavaScriptFunction() {
+				@Override
+				public void call(org.json.JSONArray arguments) throws JSONException {
+					MyUI.this.handle(arguments);
+				}
+			} ));
+			layout.setMargin(true);
+			layout.setSpacing(true);
+
+			setContent(layout);
 	}
 
 	public void handle(org.json.JSONArray args) throws JSONException {
